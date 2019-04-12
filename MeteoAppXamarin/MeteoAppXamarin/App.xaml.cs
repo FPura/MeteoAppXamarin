@@ -7,6 +7,8 @@ namespace MeteoAppXamarin
 {
     public partial class App : Application
     {
+        static Database db;
+
         public App()
         {
             InitializeComponent();
@@ -16,6 +18,8 @@ namespace MeteoAppXamarin
 
         protected override void OnStart()
         {
+            Gelocator geo = new Gelocator();
+            geo.GetLocation();
             // Handle when your app starts
         }
 
@@ -27,6 +31,16 @@ namespace MeteoAppXamarin
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public static Database Database
+        {
+            get
+            {
+                if (db == null) // se l'istanza è nulla, la creo
+                    db = new Database();
+                return db; // ritorno l'istanza
+            }
         }
     }
 }

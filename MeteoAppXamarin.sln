@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoAppXamarin.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoAppXamarin.iOS", "MeteoAppXamarin\MeteoAppXamarin.iOS\MeteoAppXamarin.iOS.csproj", "{AB7815FE-4973-4A02-BAE2-6A4BC1E0796F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteoAppXamarin", "MeteoAppXamarin\MeteoAppXamarin\MeteoAppXamarin.csproj", "{A2BBE812-FFDE-444D-B868-CC2A53B959B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeteoAppXamarin", "MeteoAppXamarin\MeteoAppXamarin\MeteoAppXamarin.csproj", "{A2BBE812-FFDE-444D-B868-CC2A53B959B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
