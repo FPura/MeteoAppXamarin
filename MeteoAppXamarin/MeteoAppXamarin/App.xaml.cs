@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeteoApp;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +14,14 @@ namespace MeteoAppXamarin
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            var nav = new NavigationPage(new MeteoListPage())
+            {
+                BarBackgroundColor = Color.LightGreen,
+                BarTextColor = Color.White
+            };
+
+            MainPage = nav;
+            //MainPage = new MainPage();
         }
 
         protected override void OnStart()
