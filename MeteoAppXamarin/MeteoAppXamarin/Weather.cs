@@ -7,11 +7,11 @@ namespace MeteoAppXamarin
 {
     public class Weather
     {
-        public string WeatherResourceImage { get; set; }
-        public double Temperature { get; set; }
-        public string Description { get; set; }
-        public string LocationName { get; set; }
-        public Image Bitmap { get; set; }
+        public string weatherResourceImage;
+        public double temperature;
+        public string description;
+        public string locationName;
+        public Image bitmap;
 
     }
 }
