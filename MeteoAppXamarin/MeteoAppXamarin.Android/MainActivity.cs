@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Acr.UserDialogs;
 
 namespace MeteoAppXamarin.Droid
 {
@@ -14,6 +15,9 @@ namespace MeteoAppXamarin.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+
+            UserDialogs.Init(this);
+
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;

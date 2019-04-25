@@ -1,4 +1,5 @@
-﻿using MeteoAppXamarin;
+﻿using Acr.UserDialogs;
+using MeteoAppXamarin;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,7 @@ namespace MeteoApp
 
             BindingContext = new MeteoListViewModel();
 
-            Location loc = new Location();
-            loc.Name = "a";
-            GetWeatherAsync(loc);
+            GetWeathers();
         }
 
         protected override void OnAppearing()
@@ -34,7 +33,28 @@ namespace MeteoApp
 
         void OnItemAdded(object sender, EventArgs e)
         {
-            DisplayAlert("Messaggio", "Testo", "OK");
+
+            addLocation();
+    
+        }
+
+        private async Task addLocation()
+        {
+            PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
+            {
+                InputType = InputType.Default,
+                OkText = "Add",
+                Title = "Add location",
+            });
+
+            if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
+            {
+                Location newLocation = new Location();
+                newLocation.Name = pResult.Text;
+                await GetWeatherAsyncFromName(newLocation);
+                if (newLocation.Weather != null)
+                    ((MeteoListViewModel)BindingContext).addAndSave(newLocation);
+            }
         }
 
         void OnListItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -48,31 +68,50 @@ namespace MeteoApp
             }
         }
 
-        private async Task GetWeatherAsync(Location location)
+        private async Task GetWeathers()
+        {
+            foreach (var location in ((MeteoListViewModel)BindingContext).Entries)
+            {
+                GetWeatherAsyncFromName(location);
+            }
+        }
+        private async Task GetWeatherAsyncFromName(Location location)
         {
             var httpClient = new HttpClient();
-            string content = await httpClient.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=" + location.Name+"&appid="+apiKey);
+            string content = await httpClient.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?q=" + location.Name + "&appid=" + apiKey);
 
             JObject weather = JObject.Parse(content);
 
             Weather newWeather = new Weather();
-            newWeather.description = (string) weather["weather"][0]["description"];
-            newWeather.temperature = (double) weather["main"]["temp"];
-            newWeather.locationName = (string) weather["name"];
+            newWeather.description = (string)weather["weather"][0]["description"];
+            newWeather.temperature = (double)weather["main"]["temp"];
+            newWeather.locationName = (string)weather["name"];
             Image image = new Image();
             Stream stream = new MemoryStream(await httpClient.GetByteArrayAsync("https://openweathermap.org/img/w/" + (string)weather["weather"][0]["icon"] + ".png"));
             image.Source = ImageSource.FromStream(() => { return stream; });
             newWeather.bitmap = image;
-            Debug.WriteLine(weather, "WEEEE");
+
+            location.Name = newWeather.locationName;
+            location.Weather = newWeather;
+            //  Debug.WriteLine(weather, "WEEEE");
         }
-        private async Task GetWeatherAsync()
+        private async Task GetWeatherAsyncFromCoord(Location location)
         {
             var httpClient = new HttpClient();
-            var content = await httpClient.GetStringAsync("https://samples.openweathermap.org/data/2.5/weather?q=Locarno&appid=b6907d289e10d714a6e88b30761fae22");
+            string content = await httpClient.GetStringAsync("https://api.openweathermap.org/data/2.5/weather?lon=" + location.Longitude + "&lat="+ location.Latitude +"&appid=" + apiKey);
 
-            var weather = (string)JObject.Parse(content)["weather"][0]["main"];
+            JObject weather = JObject.Parse(content);
 
-            Debug.WriteLine("WEEEEEEEEEEEEEEEE", weather);
+            Weather newWeather = new Weather();
+            newWeather.description = (string)weather["weather"][0]["description"];
+            newWeather.temperature = (double)weather["main"]["temp"];
+            newWeather.locationName = (string)weather["name"];
+            Image image = new Image();
+            Stream stream = new MemoryStream(await httpClient.GetByteArrayAsync("https://openweathermap.org/img/w/" + (string)weather["weather"][0]["icon"] + ".png"));
+            image.Source = ImageSource.FromStream(() => { return stream; });
+            newWeather.bitmap = image;
+
+            location.Weather = newWeather;
         }
     }
 }
