@@ -72,7 +72,7 @@ namespace MeteoApp
         {
             foreach (var location in ((MeteoListViewModel)BindingContext).Entries)
             {
-                GetWeatherAsyncFromName(location);
+                await GetWeatherAsyncFromName(location);
             }
         }
         private async Task GetWeatherAsyncFromName(Location location)

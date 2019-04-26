@@ -2,15 +2,14 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace MeteoApp
 {
     public class MeteoListViewModel : BaseViewModel
     {
-
-
+       
         ObservableCollection<Location> _entries;
-
 
         public static Database locationsDB = new Database();
 
@@ -27,18 +26,16 @@ namespace MeteoApp
         public MeteoListViewModel()
         {
             Entries = new ObservableCollection<Location>();
-            Location location = new Location();
-            location.Id = 1;
-            location.Name = "locarno";
-            locationsDB.SaveItemAsync(location);
-            List<Location> locs = locationsDB.GetItemsAsync().Result;
-            foreach (var loc in locs)
+           
+            Task<List<Location>> locs = locationsDB.GetItemsAsync();
+            locs.Wait();
+            foreach (var loc in locs.Result)
             {
-               /* var e = new Location
-                {
-                    Id = i,
-                    Name = "Entry " + i
-                };*/
+                /* var e = new Location
+                 {
+                     Id = i,
+                     Name = "Entry " + i
+                 };*/
 
                 Entries.Add(loc);
             }
