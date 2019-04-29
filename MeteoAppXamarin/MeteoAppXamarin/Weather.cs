@@ -7,7 +7,6 @@ namespace MeteoAppXamarin
 {
     public class Weather
     {
-        public string weatherResourceImage;
         public double temperature;
         public string description;
         public string locationName;

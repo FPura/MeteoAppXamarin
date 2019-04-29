@@ -1,4 +1,5 @@
 ﻿using Acr.UserDialogs;
+using AdvancedTimer.Forms.Plugin.Abstractions;
 using MeteoAppXamarin;
 using Newtonsoft.Json.Linq;
 using System;
@@ -16,7 +17,7 @@ namespace MeteoApp
     public partial class MeteoListPage : ContentPage
     {
         private string apiKey = "815504bb440299e3ebbb76868cbc7c47";
-
+        private Location currentLocation;
         public MeteoListPage()
         {
             InitializeComponent();
@@ -24,6 +25,29 @@ namespace MeteoApp
             BindingContext = new MeteoListViewModel();
 
             GetWeathers();
+
+            IAdvancedTimer timer = DependencyService.Get<IAdvancedTimer>();
+
+            timer.initTimer(3000, updateCurrentLocation, true);
+
+            timer.startTimer();
+        }
+
+        private void updateCurrentLocation(object sender, EventArgs e)
+        {
+      
+            if(currentLocation == null)
+            {
+                currentLocation = new Location();
+                ((MeteoListViewModel)BindingContext).Entries.Add(currentLocation);
+            }
+            Gelocator geo = new Gelocator();
+            Task<Location> location = geo.GetLocation();
+            location.Wait();
+            currentLocation.Longitude = location.Result.Longitude;
+            currentLocation.Latitude = location.Result.Latitude;
+            GetWeatherAsyncFromCoord(currentLocation);
+          //  Debug.WriteLine(currentLocation.Name, "WEEEE");
         }
 
         protected override void OnAppearing()
@@ -33,9 +57,7 @@ namespace MeteoApp
 
         void OnItemAdded(object sender, EventArgs e)
         {
-
             addLocation();
-    
         }
 
         private async Task addLocation()
@@ -53,7 +75,12 @@ namespace MeteoApp
                 newLocation.Name = pResult.Text;
                 await GetWeatherAsyncFromName(newLocation);
                 if (newLocation.Weather != null)
+                {
+                    Weather temp = newLocation.Weather;
+                    newLocation.Weather = null;
                     ((MeteoListViewModel)BindingContext).addAndSave(newLocation);
+                    newLocation.Weather = temp;
+                }
             }
         }
 
@@ -61,6 +88,7 @@ namespace MeteoApp
         {
             if (e.SelectedItem != null)
             {
+                ((MeteoListViewModel)BindingContext).Entries = ((MeteoListViewModel)BindingContext).Entries;
                 Navigation.PushAsync(new MeteoItemPage()
                 {
                     BindingContext = new MeteoItemViewModel(e.SelectedItem as Location)
@@ -111,6 +139,7 @@ namespace MeteoApp
             image.Source = ImageSource.FromStream(() => { return stream; });
             newWeather.bitmap = image;
 
+            location.Name = newWeather.locationName;
             location.Weather = newWeather;
         }
     }

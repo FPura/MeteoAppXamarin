@@ -25,6 +25,9 @@ namespace MeteoAppXamarin.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            AdvancedTimer.Forms.Plugin.Droid.AdvancedTimerImplementation.Init();
+
             LoadApplication(new App());
         }
 

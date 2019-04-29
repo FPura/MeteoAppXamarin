@@ -26,7 +26,7 @@ namespace MeteoApp
         public MeteoListViewModel()
         {
             Entries = new ObservableCollection<Location>();
-           
+
             Task<List<Location>> locs = locationsDB.GetItemsAsync();
             locs.Wait();
             foreach (var loc in locs.Result)
