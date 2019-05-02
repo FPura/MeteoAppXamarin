@@ -40,7 +40,7 @@ namespace MeteoApp
                 Entries.Add(loc);
             }
         }
-
+       
         public void addAndSave(Location location)
         {
             location.Id = Entries.Count + 1;

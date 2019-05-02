@@ -15,7 +15,7 @@ namespace MeteoAppXamarin
 
             var nav = new NavigationPage(new MeteoListPage())
             {
-                BarBackgroundColor = Color.LightGreen,
+                BarBackgroundColor = Color.Blue,
                 BarTextColor = Color.White
             };
 

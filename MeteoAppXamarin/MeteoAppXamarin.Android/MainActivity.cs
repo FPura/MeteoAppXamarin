@@ -17,7 +17,7 @@ namespace MeteoAppXamarin.Droid
         {
 
             UserDialogs.Init(this);
-
+         
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             TabLayoutResource = Resource.Layout.Tabbar;

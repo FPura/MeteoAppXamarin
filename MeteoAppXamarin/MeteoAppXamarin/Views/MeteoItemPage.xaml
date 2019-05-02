@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MeteoApp.MeteoItemPage">
     <ContentPage.Content>
-        <RelativeLayout x:Name="container">
-            <Label Text="{Binding Entry.Name}" RelativeLayout.XConstraint="{ConstraintExpression 
-                        Type=RelativeToParent,
-                        Property=Width, 
-                        Factor=0.5,
-                        Constant=-25}"
-                   RelativeLayout.YConstraint=
-                "{ConstraintExpression 
-                        Type=RelativeToParent,
-                        Property=Height,
-                        Factor=0.5,
-                        Constant=-25}"
+        <StackLayout x:Name="container" BackgroundColor="Azure">
+            <Image Source="{Binding EntryWeather.icon}"  HorizontalOptions="FillAndExpand"
+       VerticalOptions="FillAndExpand" />
+            <Label Text="{Binding EntryWeather.description}" TextColor="Blue" LineBreakMode="WordWrap"  LineHeight="10" HorizontalTextAlignment="Center" FontSize="Small"  VerticalOptions="Center"
             ></Label>
-        </RelativeLayout>
+            <Label Text="{Binding Entry.Name}" LineBreakMode="WordWrap" TextColor="Blue" LineHeight="10" HorizontalTextAlignment="Center" FontSize="Large"  VerticalOptions="Center" 
+            ></Label>
+            <Label Text="{Binding EntryWeather.temperature,StringFormat='{0} °C'}" TextColor="Blue" LineBreakMode="WordWrap"  LineHeight="10" HorizontalTextAlignment="Center" FontSize="20"  VerticalOptions="Center"
+            ></Label>
+            
+          
+
+
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

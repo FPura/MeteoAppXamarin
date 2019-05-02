@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,5 +175,35 @@
       <Project>{E4727446-432F-446C-8319-5EE130905357}</Project>
       <Name>MeteoAppXamarin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\broken_cloud.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\clear_d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\clear_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\cloud_d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\cloud_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\few_clouds_d.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\fog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\few_clouds_n.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\rain.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\snow.png" />
   </ItemGroup>
 </Project>

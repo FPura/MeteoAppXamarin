@@ -9,6 +9,7 @@ namespace MeteoApp
     {
         public MeteoItemPage()
         {
+
             InitializeComponent();
         }
     }

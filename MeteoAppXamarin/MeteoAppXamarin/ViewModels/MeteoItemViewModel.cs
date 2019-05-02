@@ -6,7 +6,7 @@ namespace MeteoApp
     public class MeteoItemViewModel : BaseViewModel
     {
         Location _entry;
-
+        
         public Location Entry
         {
             get { return _entry;  }
@@ -16,7 +16,11 @@ namespace MeteoApp
                 OnPropertyChanged();
             }
         }
-
+        public Weather EntryWeather
+        {
+            get { return _entry.Weather; }
+            set { }
+        }
         public MeteoItemViewModel(Location entry)
         {
             Entry = entry;

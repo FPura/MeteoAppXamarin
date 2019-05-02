@@ -23,7 +23,7 @@ namespace MeteoApp
             InitializeComponent();
 
             BindingContext = new MeteoListViewModel();
-
+         
             GetWeathers();
 
             IAdvancedTimer timer = DependencyService.Get<IAdvancedTimer>();
@@ -47,6 +47,7 @@ namespace MeteoApp
             currentLocation.Longitude = location.Result.Longitude;
             currentLocation.Latitude = location.Result.Latitude;
             GetWeatherAsyncFromCoord(currentLocation);
+           
           //  Debug.WriteLine(currentLocation.Name, "WEEEE");
         }
 
@@ -112,12 +113,11 @@ namespace MeteoApp
 
             Weather newWeather = new Weather();
             newWeather.description = (string)weather["weather"][0]["description"];
-            newWeather.temperature = (double)weather["main"]["temp"];
+          
+            newWeather.temperature =( (double)weather["main"]["temp"])-273.15;
             newWeather.locationName = (string)weather["name"];
-            Image image = new Image();
-            Stream stream = new MemoryStream(await httpClient.GetByteArrayAsync("https://openweathermap.org/img/w/" + (string)weather["weather"][0]["icon"] + ".png"));
-            image.Source = ImageSource.FromStream(() => { return stream; });
-            newWeather.bitmap = image;
+            newWeather.icon = "https://openweathermap.org/img/w/" + (string)JObject.Parse(content)["weather"][0]["icon"] + ".png";
+        
 
             location.Name = newWeather.locationName;
             location.Weather = newWeather;
@@ -132,12 +132,9 @@ namespace MeteoApp
 
             Weather newWeather = new Weather();
             newWeather.description = (string)weather["weather"][0]["description"];
-            newWeather.temperature = (double)weather["main"]["temp"];
+            newWeather.temperature = ((double)weather["main"]["temp"])-273.15;
             newWeather.locationName = (string)weather["name"];
-            Image image = new Image();
-            Stream stream = new MemoryStream(await httpClient.GetByteArrayAsync("https://openweathermap.org/img/w/" + (string)weather["weather"][0]["icon"] + ".png"));
-            image.Source = ImageSource.FromStream(() => { return stream; });
-            newWeather.bitmap = image;
+            newWeather.icon = "https://openweathermap.org/img/w/" + (string)JObject.Parse(content)["weather"][0]["icon"] + ".png";
 
             location.Name = newWeather.locationName;
             location.Weather = newWeather;
