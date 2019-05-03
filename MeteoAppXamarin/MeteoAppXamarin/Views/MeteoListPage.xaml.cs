@@ -39,7 +39,7 @@ namespace MeteoApp
             if(currentLocation == null)
             {
                 currentLocation = new Location();
-                ((MeteoListViewModel)BindingContext).Entries.Add(currentLocation);
+                //((MeteoListViewModel)BindingContext).Entries.Add(currentLocation);
             }
             Gelocator geo = new Gelocator();
             Task<Location> location = geo.GetLocation();
@@ -47,7 +47,7 @@ namespace MeteoApp
             currentLocation.Longitude = location.Result.Longitude;
             currentLocation.Latitude = location.Result.Latitude;
             GetWeatherAsyncFromCoord(currentLocation);
-           
+            ((MeteoListViewModel)BindingContext).Entries[0] = currentLocation;
           //  Debug.WriteLine(currentLocation.Name, "WEEEE");
         }
 

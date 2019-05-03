@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "616862492176",
+    "firebase_url": "https://proj-1d9db.firebaseio.com",
+    "project_id": "proj-1d9db",
+    "storage_bucket": "proj-1d9db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616862492176:android:46afbd6b7ce3fb75",
+        "android_client_info": {
+          "package_name": "com.companyname"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616862492176-474qdvp4fdgpqskaf953ac9n39cfrn7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-bH5N364q7DRU1NOaKE3wdZ8_vwRMLCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616862492176-474qdvp4fdgpqskaf953ac9n39cfrn7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:616862492176:android:7fdbcd288a3dd47e",
+        "android_client_info": {
+          "package_name": "com.companyname.MeteoAppXamarin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "616862492176-474qdvp4fdgpqskaf953ac9n39cfrn7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-bH5N364q7DRU1NOaKE3wdZ8_vwRMLCA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "616862492176-474qdvp4fdgpqskaf953ac9n39cfrn7m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

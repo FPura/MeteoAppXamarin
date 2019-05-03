@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Acr.UserDialogs;
+using Plugin.FirebasePushNotification;
 
 namespace MeteoAppXamarin.Droid
 {
@@ -29,6 +30,7 @@ namespace MeteoAppXamarin.Droid
             AdvancedTimer.Forms.Plugin.Droid.AdvancedTimerImplementation.Init();
 
             LoadApplication(new App());
+            FirebasePushNotificationManager.ProcessIntent(this, Intent);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
