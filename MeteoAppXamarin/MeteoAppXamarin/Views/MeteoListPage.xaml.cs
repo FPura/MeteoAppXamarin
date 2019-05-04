@@ -101,7 +101,9 @@ namespace MeteoApp
         {
             foreach (var location in ((MeteoListViewModel)BindingContext).Entries)
             {
-                await GetWeatherAsyncFromName(location);
+                if (location.Name != null) { 
+                    await GetWeatherAsyncFromName(location);
+                }
             }
         }
         private async Task GetWeatherAsyncFromName(Location location)
